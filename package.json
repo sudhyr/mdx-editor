@@ -1,12 +1,19 @@
 {
-  "name": "mdx-editor",
-  "version": "0.0.1",
-  "description": "MDX editor",
-  "main": "index.js",
-  "author": "rihdus",
-  "license": "MIT",
   "private": true,
+  "scripts": {
+    "start": "webpack serve",
+    "build-dev": "webpack",
+    "build": "NODE_ENV=production webpack"
+  },
   "devDependencies": {
     "prettier": "2.3.2"
+  },
+  "dependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   }
 }
