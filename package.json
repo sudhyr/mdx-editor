@@ -1,0 +1,12 @@
+{
+  "name": "mdx-editor",
+  "version": "0.0.1",
+  "description": "MDX editor",
+  "main": "index.js",
+  "author": "rihdus",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "prettier": "2.3.2"
+  }
+}
