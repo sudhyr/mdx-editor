@@ -12,6 +12,6 @@ export const [themeClass, vars] = createTheme({
 export const exampleStyle = style({
   backgroundColor: vars.color.brand,
   fontFamily: vars.font.body,
-  color: 'aquamarine',
+  color: 'slateblue',
   padding: 10
 });
