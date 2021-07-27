@@ -1,5 +1,6 @@
-import { render } from './recepie'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from "./app";
 
-window.addEventListener('DOMContentLoaded', (() => {
-  render(document.getElementById('root'))
-}))
+ReactDOM.render(<App />, document.getElementById("root"));
+
