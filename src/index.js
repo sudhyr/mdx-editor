@@ -1,3 +1,5 @@
-import { recepie } from './recepie'
+import { render } from './recepie'
 
-console.log(recepie);
+window.addEventListener('DOMContentLoaded', (() => {
+  render(document.getElementById('root'))
+}))
