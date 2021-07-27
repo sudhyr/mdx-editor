@@ -1,11 +1,3 @@
-const foo = {
-  a: 1
-};
+import { recepie } from './recepie'
 
-const bar = {
-  ...foo,
-  b: 2
-}
-
-console.log(foo);
-console.log(bar);
+console.log(recepie);
