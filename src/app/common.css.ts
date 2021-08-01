@@ -8,8 +8,7 @@ export default {
   appBody: style({
     background: 'aliceblue',
     height: '100vh',
-    width: '100vw',
-    display: 'flex'
+    width: '100vw'
   }),
 
   explorerView: style({

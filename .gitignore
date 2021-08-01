@@ -4,3 +4,6 @@
 
 # Filesystem
 .DS_Store
+
+# IDE
+/.idea

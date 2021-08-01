@@ -1,6 +1,6 @@
 import { createTheme, style } from '@vanilla-extract/css';
 
-export const [themeClass, vars] = createTheme({
+const [themeClass, vars] = createTheme({
   color: {
     brand: 'blue'
   },
