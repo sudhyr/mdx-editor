@@ -36,9 +36,9 @@ export default function PageEditor() {
 
   return (
     <div className={s.appBody}>
-      <Stack space="lg">
+      <Stack space="lg" align="left">
         <div>
-          <Button onClick={onOpenFile}>Open File</Button>
+          <Button block onClick={onOpenFile}>Open File</Button>
         </div>
         <Textarea
           label="Label"

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import styles from "./Stack.css"
 
-export default function Stack({space, ...props}) {
+export default function Stack({space, align, ...props}) {
   return (
     <div className={styles.root}>
       <div className={clsx([
@@ -12,7 +12,8 @@ export default function Stack({space, ...props}) {
         {React.Children.map(props.children, (node) => {
           return <div className={clsx([
             styles.stackChild,
-            styles.spaceVariant[space]
+            styles.spaceVariant[space],
+            styles._align[align]
           ])}>{node}</div>;
         })}
       </div>
