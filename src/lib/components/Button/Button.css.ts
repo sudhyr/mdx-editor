@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from '../theme.css'
 
+
 export default {
   buttonRoot: style({
-    color: vars.color.text.light,
     display: "block",
     margin: 0,
     padding: 0,
@@ -34,7 +34,8 @@ export default {
     position: 'relative',
     padding: `8px 12px`,
     fontFamily: vars.ff.body,
-    fontSize: vars.fs.md
+    fontSize: vars.fs.md,
+    color: vars.color.text.neutral,
   }),
   text: style({
     fontSize: 'Arial'

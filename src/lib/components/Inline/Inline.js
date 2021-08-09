@@ -1,12 +1,26 @@
 import React from 'react'
 import styles from './Inline.css'
+import clsx from "clsx";
 
-export default function Inline(props) {
+export default function Inline({space, ...props}) {
+
+  const childContainerClass = clsx([
+    styles.inlineContainer,
+    styles.spaceVariant_container[space]
+  ])
+
+  const childClasses = clsx([
+    styles.inlineChild,
+    styles.spaceVariant[space]
+  ])
+
   return (
     <div className={styles.inlineRoot}>
-      {React.Children.map(props.children, (node) => {
-        return <div className={styles.inlineChild}>{node}</div>;
-      })}
+      <div className={childContainerClass}>
+        {React.Children.map(props.children, (node) => {
+          return <div className={childClasses}>{node}</div>;
+        })}
+      </div>
     </div>
   )
 }

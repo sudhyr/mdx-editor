@@ -45,7 +45,7 @@ export default function PageEditor() {
           onChange={e => setViewData(e.target.value)}
           value={viewData}
         />
-        <Inline>
+        <Inline space="sm">
           <Button onClick={onSaveClick}>Save</Button>
           <Button onClick={onRevertClick}>Revert</Button>
         </Inline>
