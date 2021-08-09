@@ -36,7 +36,7 @@ export default function PageEditor() {
 
   return (
     <div className={s.appBody}>
-      <Stack>
+      <Stack space="lg">
         <div>
           <Button onClick={onOpenFile}>Open File</Button>
         </div>

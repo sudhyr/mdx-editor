@@ -4,21 +4,17 @@ import clsx from "clsx";
 
 export default function Inline({space, ...props}) {
 
-  const childContainerClass = clsx([
-    styles.inlineContainer,
-    styles.spaceVariant_container[space]
-  ])
-
-  const childClasses = clsx([
-    styles.inlineChild,
-    styles.spaceVariant[space]
-  ])
-
   return (
     <div className={styles.inlineRoot}>
-      <div className={childContainerClass}>
+      <div
+        className={clsx([
+          styles.inlineContainer, styles.spaceVariant_container[space]
+        ])}>
         {React.Children.map(props.children, (node) => {
-          return <div className={childClasses}>{node}</div>;
+          return <div
+            className={clsx([
+              styles.inlineChild, styles.spaceVariant[space]
+            ])}>{node}</div>;
         })}
       </div>
     </div>
