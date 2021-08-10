@@ -13,7 +13,7 @@ export default function Stack({space, align, ...props}) {
           return <div className={clsx([
             styles.stackChild,
             styles.spaceVariant[space],
-            styles._align[align]
+            styles.align[align]
           ])}>{node}</div>;
         })}
       </div>

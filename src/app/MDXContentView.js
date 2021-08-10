@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
+import SplitPane from 'react-split-pane';
 import s from "./common.css";
 import { Button, Stack, Inline, Textarea } from '../lib/components';
+import EditorView from "./EditorView";
 
 export default function PageEditor() {
   const fileHandle = useRef(null);
@@ -40,11 +42,7 @@ export default function PageEditor() {
         <div>
           <Button block onClick={onOpenFile}>Open File</Button>
         </div>
-        <Textarea
-          label="Label"
-          onChange={e => setViewData(e.target.value)}
-          value={viewData}
-        />
+        <EditorView onChange={setViewData} value={viewData}/>
         <Inline space="sm">
           <Button onClick={onSaveClick}>Save</Button>
           <Button onClick={onRevertClick}>Revert</Button>

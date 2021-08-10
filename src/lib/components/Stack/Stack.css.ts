@@ -15,7 +15,7 @@ export default {
   spaceVariant_container: styleVariants(vars.space, (space) => ({
     marginTop: `calc(${space} * -1)`
   })),
-  _align: styleVariants({
+  align: styleVariants({
     left: 'flex-start',
     right: 'flex-end',
     center: 'center'

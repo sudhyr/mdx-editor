@@ -1,4 +1,4 @@
-import { createTheme } from "@vanilla-extract/css";
+import {createTheme, globalStyle} from "@vanilla-extract/css";
 
 const [varsClassContainer, componentThemeVars] = createTheme({
   color: {
@@ -41,6 +41,22 @@ const [varsClassContainer, componentThemeVars] = createTheme({
     xl: "12px",
   },
 });
+
+globalStyle('Resizer', {
+  background: '#000',
+  opacity: 0.2,
+  zIndex: 1,
+  boxSizing: 'border-box',
+  backgroundClip: 'padding-box',
+})
+
+globalStyle('Resizer.vertical', {
+  width: '11px',
+  margin: '0 -5px',
+  borderLeft: '5px solid rgba(255, 255, 255, 0)',
+  borderRight: '5px solid rgba(255, 255, 255, 0)',
+  cursor: 'col-resize'
+})
 
 export const themeClassContainer = varsClassContainer;
 export const vars = componentThemeVars;
