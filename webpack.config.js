@@ -3,6 +3,7 @@ const {
   VanillaExtractPlugin
 } = require('@vanilla-extract/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 
 let mode = process.env.NODE_ENV || "development"
@@ -32,7 +33,14 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      // {
+      //   test: /\.css$/i,
+      //   use: [
+      //     "style-loader",
+      //     "css-loader"
+      //   ]
+      // },
     ]
   },
   devtool: "source-map",
@@ -41,13 +49,26 @@ module.exports = {
     hot: true
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', 'jsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.css'],
+    fallback: {
+      "fs": false,
+      // "tls": false,
+      // "net": false,
+      // "path": false,
+      // "zlib": false,
+      // "http": false,
+      // "https": false,
+      // "stream": false,
+      // "crypto": false,
+      // "crypto-browserify": require.resolve('crypto-browserify'), //if you want to use this module also don't forget npm i crypto-browserify
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     }),
     new VanillaExtractPlugin(),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new NodePolyfillPlugin()
   ]
 }
