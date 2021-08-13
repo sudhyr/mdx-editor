@@ -4,54 +4,100 @@ name: GitHub Pages
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-     branches: [ master ]
+    branches: [ master ]
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  
+
 jobs:
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-20.04
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
-          cmd: install
+          node-version: '14'
 
-#       - name: Cache dependencies
-#         uses: actions/cache@v2
-#         with:
-#           path: ~/.npm
-#           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-#           restore-keys: |
-#             ${{ runner.os }}-node-
-            
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
+      - run: npm install
+      - run: npm run build
+      - run: tar -czvf site.tar.gz ./dist
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+
+#name: GitHub Pages
+#
+## Controls when the workflow will run
+#on:
+#  # Triggers the workflow on push or pull request events but only for the master branch
+#  push:
+#     branches: [ master ]
+#  pull_request:
+#
+#  # Allows you to run this workflow manually from the Actions tab
+#  workflow_dispatch:
+
+#jobs:
+#  build:
+#    # The type of runner that the job will run on
+#    runs-on: ubuntu-20.04
+#    concurrency:
+#      group: ${{ github.workflow }}-${{ github.ref }}
+#
+#    # Steps represent a sequence of tasks that will be executed as part of the job
+#    steps:
+#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+##      - uses: actions/checkout@v2
+##      - uses: borales/actions-yarn@v2.3.0
+##        with:
+##          cmd: install
+#
+##       - name: Cache dependencies
+##         uses: actions/cache@v2
+##         with:
+##           path: ~/.npm
+##           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+##           restore-keys: |
+##             ${{ runner.os }}-node-
+#
 #       - name: Build site
-#       - run: yarn build
+#       - run: npm install
+#       - run: npm build
 #       - run: tar -czvf site.tar.gz ./dist
-      
-#       - name: Upload artifact
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: site-build-artifact
-#           path: ./site.tar.gz
-      
-#   deploy:
-#     runs-on: ubuntu-20.04
-#     concurrency:
-#       group: ${{ github.workflow }}-${{ github.ref }}
-#     steps:
-#       - name: Deploy
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: ${{ github.ref == 'refs/heads/main' }}
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./dist
+#
+##       - name: Upload artifact
+##         uses: actions/upload-artifact@v2
+##         with:
+##           name: site-build-artifact
+##           path: ./site.tar.gz
+#
+##   deploy:
+##     runs-on: ubuntu-20.04
+##     concurrency:
+##       group: ${{ github.workflow }}-${{ github.ref }}
+##     steps:
+##       - name: Deploy
+##         uses: peaceiris/actions-gh-pages@v3
+##         if: ${{ github.ref == 'refs/heads/main' }}
+##         with:
+##           github_token: ${{ secrets.GITHUB_TOKEN }}
+##           publish_dir: ./dist
