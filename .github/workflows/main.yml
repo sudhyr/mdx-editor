@@ -14,35 +14,35 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+#     concurrency:
+#       group: ${{ github.workflow }}-${{ github.ref }}
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
+#       - uses: borales/actions-yarn@v2.3.0
+#         with:
+#           cmd: install
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#       - name: Cache dependencies
+#         uses: actions/cache@v2
+#         with:
+#           path: ~/.npm
+#           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+#           restore-keys: |
+#             ${{ runner.os }}-node-
             
 
-      - name: Build site
-      - run: yarn build
-      - run: tar -czvf site.tar.gz ./dist
+#       - name: Build site
+#       - run: yarn build
+#       - run: tar -czvf site.tar.gz ./dist
       
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: site-build-artifact
-          path: ./site.tar.gz
+#       - name: Upload artifact
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: site-build-artifact
+#           path: ./site.tar.gz
       
 #   deploy:
 #     runs-on: ubuntu-20.04
