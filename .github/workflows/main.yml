@@ -44,6 +44,7 @@ jobs:
           path: ./site.tar.gz
 
   deploy:
+    needs: build
     runs-on: ubuntu-20.04
     steps:
       - name: Download a Build Artifact
