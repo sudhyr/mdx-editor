@@ -49,7 +49,7 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
-          name: site.tar.gz
+          name: site-build-artifact
     
       - run: tar -xvzf ./site.tar.gz -C ./
     
