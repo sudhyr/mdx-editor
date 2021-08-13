@@ -7,9 +7,13 @@ const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 
 let mode = process.env.NODE_ENV || "development"
+let PUBLIC_PATH = process.env.PUBLIC_PATH || ""
 
 module.exports = {
   mode: mode,
+  output: {
+    publicPath: PUBLIC_PATH,
+  },
   module: {
     rules: [
       {
