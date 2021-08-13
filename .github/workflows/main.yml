@@ -43,6 +43,16 @@ jobs:
           name: site-build-artifact
           path: ./site.tar.gz
 
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: site.tar.gz
+    
+      - run: tar -xvzf ./site.tar.gz -C ./
+    
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/master' }}
