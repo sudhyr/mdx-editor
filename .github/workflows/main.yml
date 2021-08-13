@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      PUBLIC_PATH: /mdx-editor
+      HOST_PUBLIC_PATH_PREFIX: /mdx-editor
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

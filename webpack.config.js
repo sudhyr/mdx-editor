@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {
   VanillaExtractPlugin
@@ -7,7 +8,10 @@ const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 
 let mode = process.env.NODE_ENV || "development"
-let PUBLIC_PATH = process.env.PUBLIC_PATH || ""
+let PUBLIC_PATH = process.env.HOST_PUBLIC_PATH_PREFIX || ""
+
+console.log('PUBLIC_PATH:', PUBLIC_PATH)
+console.log('mode:', mode)
 
 module.exports = {
   mode: mode,
@@ -73,6 +77,10 @@ module.exports = {
     }),
     new VanillaExtractPlugin(),
     new MiniCssExtractPlugin(),
-    new NodePolyfillPlugin()
-  ]
+    new NodePolyfillPlugin(),
+    new webpack.EnvironmentPlugin({
+      PUBLIC_PATH
+    })
+
+]
 }
