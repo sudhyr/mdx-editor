@@ -1,22 +1,29 @@
 const webpack = require('webpack')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {
   VanillaExtractPlugin
 } = require('@vanilla-extract/webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
-let mode = process.env.NODE_ENV || "development"
-let PUBLIC_PATH = process.env.HOST_PUBLIC_PATH_PREFIX || ""
-
-console.log('PUBLIC_PATH:', PUBLIC_PATH)
-console.log('mode:', mode)
+const ENV = [['NODE_ENV', "development"], ['HOST_PUBLIC_PATH_PREFIX', '/']].reduce((env, [key, defaultValue]) => {
+  env[key] = process.env[key] || defaultValue
+  return env;
+}, {})
+let mode = ENV.NODE_ENV
 
 module.exports = {
   mode: mode,
   output: {
-    publicPath: PUBLIC_PATH,
+    publicPath: ENV.PUBLIC_PATH,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
@@ -59,7 +66,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.css'],
     fallback: {
-      "fs": false,
+      "fs": false, /* required for @mdx-js/runtime */
       // "tls": false,
       // "net": false,
       // "path": false,
@@ -79,8 +86,13 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new NodePolyfillPlugin(),
     new webpack.EnvironmentPlugin({
-      PUBLIC_PATH
+      PUBLIC_PATH: ENV.HOST_PUBLIC_PATH_PREFIX
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'json',
+      generateStatsFile: true,
+      reportFilename: path.join(__dirname, 'build', 'report.json'),
+      statsFilename: path.join(__dirname, 'build', 'stats.json'),
     })
-
-]
+  ]
 }
