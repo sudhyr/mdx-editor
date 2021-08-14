@@ -41,13 +41,13 @@ jobs:
       - name: Create build artefact
         uses: actions/upload-artifact@v2
         with:
-          name: site-build-artefact.tar.gz
+          name: site.tar.gz
           path: ./site.tar.gz
 
       - name: Create stats artefact
         uses: actions/upload-artifact@v2
         with:
-          name: report-artifact.tar.gz
+          name: report.tar.gz
           path: ./report.tar.gz
 
   deploy:
@@ -57,7 +57,7 @@ jobs:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
-          name: site-build-artifact
+          name: site.tar.gz
 
       - run: tar -xvzf ./site.tar.gz -C ./
 
