@@ -36,12 +36,19 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: tar -czvf site.tar.gz ./dist
+      - run: tar -czvf report.tar.gz ./build/report
 
-      - name: Upload artifact
+      - name: Create build artefact
         uses: actions/upload-artifact@v2
         with:
-          name: site-build-artifact
+          name: site-build-artefact.tar.gz
           path: ./site.tar.gz
+
+      - name: Create stats artefact
+        uses: actions/upload-artifact@v2
+        with:
+          name: report-artifact.tar.gz
+          path: ./report.tar.gz
 
   deploy:
     needs: build

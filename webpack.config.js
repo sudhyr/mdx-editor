@@ -91,8 +91,8 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: 'json',
       generateStatsFile: true,
-      reportFilename: path.join(__dirname, 'build', 'report.json'),
-      statsFilename: path.join(__dirname, 'build', 'stats.json'),
+      reportFilename: path.join(__dirname, 'build', 'report', 'report.json'),
+      statsFilename: path.join(__dirname, 'build', 'report', 'stats.json'),
     })
   ]
 }
